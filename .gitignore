@@ -1,0 +1,14 @@
+# Java / Maven build output
+project-service/target/
+
+# Frontend dependencies and build output
+construction-erp-frontend/node_modules/
+construction-erp-frontend/dist/
+construction-erp-frontend/.env
+construction-erp-frontend/.env.local
+
+# IDE and operating system files
+.idea/
+*.iml
+.DS_Store
+Thumbs.db

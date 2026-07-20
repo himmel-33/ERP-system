@@ -1,6 +1,6 @@
 # Construction ERP Project Service
 
-건설 ERP 시스템에서 프로젝트 정보를 담당할 Spring Boot 마이크로서비스의 1단계 기본 골격입니다. 현재 단계는 이후 엔티티, 서비스 및 API 구현을 위한 빌드 가능한 기반만 제공합니다.
+건설 ERP 시스템에서 프로젝트 정보를 담당하는 Spring Boot 마이크로서비스입니다. 프로젝트 조회, 등록, 수정 및 삭제 REST API를 제공합니다.
 
 ## 요구 환경
 
@@ -53,13 +53,17 @@ java -jar target/project-service-0.0.1-SNAPSHOT.jar
 - Swagger UI: http://localhost:8081/swagger-ui.html
 - OpenAPI JSON: http://localhost:8081/v3/api-docs
 
+## 제공 API
+
+- `GET /api/projects`
+- `GET /api/projects/{id}`
+- `POST /api/projects`
+- `PUT /api/projects/{id}`
+- `DELETE /api/projects/{id}`
+
 ## 현재 구현되지 않은 기능
 
-- Project 엔티티의 전체 필드 및 상태 Enum
-- DTO 필드와 Entity/DTO 변환
-- CRUD API와 Controller 메서드
-- Service 비즈니스 로직 및 Repository 주입
-- Repository 사용자 정의 쿼리
+- 프로젝트 상태 Enum 및 상태 변경 전용 흐름
 - Redis 및 API Gateway 연동
 - 인증과 권한 처리
 - 다른 마이크로서비스와의 통신
