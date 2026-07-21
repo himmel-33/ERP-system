@@ -35,13 +35,13 @@ public class ProjectEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "id", columnDefinition = "uniqueidentifier")
+    @Column(name = "id", columnDefinition = "RAW(16)")
     private UUID id;
 
     @Column(name = "name", nullable = false, length = 255)
     private String name;
 
-    @Column(name = "description", columnDefinition = "varchar(max)")
+    @Column(name = "description", columnDefinition = "CLOB")
     private String description;
 
     @Column(name = "location", length = 255)
@@ -59,7 +59,7 @@ public class ProjectEntity {
     @Column(name = "status", nullable = false, length = 50)
     private String status;
 
-    @Column(name = "projectManagerId", columnDefinition = "uniqueidentifier")
+    @Column(name = "projectManagerId", columnDefinition = "RAW(16)")
     private UUID projectManagerId;
 
     @Column(name = "createdAt", nullable = false, updatable = false)

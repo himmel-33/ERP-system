@@ -1,17 +1,26 @@
-IF OBJECT_ID(N'dbo.Projects', N'U') IS NULL
+DECLARE
+    project_table_count NUMBER;
 BEGIN
-    CREATE TABLE dbo.Projects
-    (
-        id UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
-        name VARCHAR(255) NOT NULL,
-        description VARCHAR(MAX),
-        location VARCHAR(255),
-        startDate DATE,
-        endDate DATE,
-        budget DECIMAL(15, 2),
-        status VARCHAR(50) NOT NULL DEFAULT 'PLANNING',
-        projectManagerId UNIQUEIDENTIFIER,
-        createdAt DATETIME2 NOT NULL DEFAULT GETDATE(),
-        updatedAt DATETIME2
-    );
+    SELECT COUNT(*)
+      INTO project_table_count
+      FROM USER_TABLES
+     WHERE TABLE_NAME = 'PROJECTS';
+
+    IF project_table_count = 0 THEN
+        EXECUTE IMMEDIATE '
+            CREATE TABLE Projects
+            (
+                id RAW(16) DEFAULT SYS_GUID() PRIMARY KEY,
+                name VARCHAR2(255 CHAR) NOT NULL,
+                description CLOB,
+                location VARCHAR2(255 CHAR),
+                startDate DATE,
+                endDate DATE,
+                budget NUMBER(15, 2),
+                status VARCHAR2(50 CHAR) DEFAULT ''PLANNING'' NOT NULL,
+                projectManagerId RAW(16),
+                createdAt TIMESTAMP DEFAULT SYSTIMESTAMP NOT NULL,
+                updatedAt TIMESTAMP
+            )';
+    END IF;
 END;

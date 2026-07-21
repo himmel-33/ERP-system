@@ -2,23 +2,30 @@
 
 건설 프로젝트의 기본 정보, 일정, 예산 및 진행 상태를 관리하는 풀스택 예제입니다.
 
-- `project-service`: Java 17, Spring Boot, JPA, MSSQL 기반 REST API
+- `project-service`: Java 17, Spring Boot, JPA, Oracle 기반 REST API
 - `construction-erp-frontend`: React, Vite, React Router, Axios 기반 관리자 화면
 
 ## 실행 순서
 
-### 1. MSSQL 준비
+### 1. Oracle 준비
 
-SQL Server를 `localhost:1433`에서 실행하고 관리자 도구 또는 `sqlcmd`에서 데이터베이스를 생성합니다.
+Oracle AI Database Free를 설치하고 기본 Pluggable Database인 `FREEPDB1`을 실행합니다. SQL Developer 또는 SQL*Plus에서 관리자 계정으로 `FREEPDB1`에 접속한 뒤 애플리케이션 사용자를 생성합니다.
 
-```sql
-IF DB_ID(N'construction_erp') IS NULL
-BEGIN
-    CREATE DATABASE construction_erp;
-END;
+```text
+호스트: localhost
+포트: 1521
+서비스 이름: FREEPDB1
 ```
 
-백엔드가 시작될 때 `project-service/src/main/resources/schema.sql`이 실행되어 `Projects` 테이블이 없는 경우 자동 생성됩니다. 사용하는 계정에는 `construction_erp` 데이터베이스 접근 및 테이블 생성 권한이 있어야 합니다.
+```sql
+ALTER SESSION SET CONTAINER = FREEPDB1;
+
+CREATE USER construction_erp_app IDENTIFIED BY "your_strong_password";
+GRANT CREATE SESSION, CREATE TABLE TO construction_erp_app;
+ALTER USER construction_erp_app QUOTA UNLIMITED ON USERS;
+```
+
+백엔드가 시작될 때 `project-service/src/main/resources/schema.sql`이 실행되어 `PROJECTS` 테이블이 없는 경우 자동 생성됩니다.
 
 ### 2. 백엔드 실행
 
@@ -28,6 +35,7 @@ END;
 cd C:\Users\82104\Desktop\claude\e-study\project-service
 $env:DB_USERNAME="your_username"
 $env:DB_PASSWORD="your_password"
+$env:DB_URL="jdbc:oracle:thin:@//localhost:1521/FREEPDB1"
 mvn clean compile
 mvn spring-boot:run
 ```

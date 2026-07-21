@@ -6,28 +6,30 @@
 
 - Java 17
 - Maven 3.9 이상 권장
-- Microsoft SQL Server (`localhost:1433`)
+- Oracle AI Database Free (`localhost:1521/FREEPDB1`) 또는 호환 Oracle Database
 
-## 데이터베이스 준비
+## Oracle 스키마 준비
 
-SQL Server에 접속하여 다음 명령으로 데이터베이스를 생성합니다.
+SQL Developer 또는 SQL*Plus에서 관리자 계정으로 `FREEPDB1`에 접속하여 애플리케이션 사용자를 생성합니다.
 
 ```sql
-IF DB_ID(N'construction_erp') IS NULL
-BEGIN
-    CREATE DATABASE construction_erp;
-END;
+ALTER SESSION SET CONTAINER = FREEPDB1;
+
+CREATE USER construction_erp_app IDENTIFIED BY "your_strong_password";
+GRANT CREATE SESSION, CREATE TABLE TO construction_erp_app;
+ALTER USER construction_erp_app QUOTA UNLIMITED ON USERS;
 ```
 
-애플리케이션 시작 시 `src/main/resources/schema.sql`이 실행되어 `Projects` 테이블이 존재하지 않을 경우 생성합니다. 데이터베이스 계정에는 해당 데이터베이스의 테이블 생성 권한이 필요합니다.
+애플리케이션 시작 시 `src/main/resources/schema.sql`이 실행되어 `PROJECTS` 테이블이 존재하지 않을 경우 생성합니다.
 
 ## 환경 변수
 
 PowerShell에서는 다음과 같이 현재 세션의 접속 정보를 설정합니다.
 
 ```powershell
-$env:DB_USERNAME="your_username"
+$env:DB_USERNAME="construction_erp_app"
 $env:DB_PASSWORD="your_password"
+$env:DB_URL="jdbc:oracle:thin:@//localhost:1521/FREEPDB1"
 ```
 
 운영 비밀번호를 소스 코드나 버전 관리 시스템에 저장하지 마십시오.
