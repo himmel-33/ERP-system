@@ -5,6 +5,10 @@
 - `project-service`: Java 17, Spring Boot, JPA, Oracle 기반 REST API
 - `construction-erp-frontend`: React, Vite, React Router, Axios 기반 관리자 화면
 
+## 프로젝트 관리 화면
+
+![Construction ERP 프로젝트 관리 화면](docs/images/project-dashboard.png)
+
 ## 실행 순서
 
 ### 1. Oracle 준비
