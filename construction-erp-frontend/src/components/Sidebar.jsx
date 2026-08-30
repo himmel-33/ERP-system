@@ -1,12 +1,5 @@
 import { NavLink } from 'react-router-dom'
-
-const menuItems = [
-  { to: '/dashboard', icon: '⌂', label: '대시보드' },
-  { to: '/projects', icon: '▤', label: '프로젝트 관리' },
-  { to: '/resources', icon: '◇', label: '자원/재료 관리' },
-  { to: '/workforce', icon: '♙', label: '인력 관리' },
-  { to: '/finance', icon: '₩', label: '재무/회계' },
-]
+import { moduleNavigation } from '../data/erpModules'
 
 function Sidebar({ open, onClose }) {
   return (
@@ -19,23 +12,19 @@ function Sidebar({ open, onClose }) {
             <small>Enterprise Resource Planning</small>
           </div>
         </div>
-        <p className="menu-label">WORKSPACE</p>
-        <nav>
-          {menuItems.map((item) => (
-            <NavLink
-              key={item.to}
-              to={item.to}
-              onClick={onClose}
-              className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}
-            >
-              <span className="nav-icon">{item.icon}</span>
-              {item.label}
-            </NavLink>
-          ))}
+        <nav className="sidebar-nav">
+          {moduleNavigation.map((group) => <div className="nav-group" key={group.section}>
+            <p className="menu-label">{group.section}</p>
+            {group.items.map((item) => (
+              <NavLink key={item.to} to={item.to} onClick={onClose} className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
+                <span className="nav-icon">{item.icon}</span>{item.label}
+              </NavLink>
+            ))}
+          </div>)}
         </nav>
         <div className="sidebar-footer">
-          <span>PROJECT SERVICE</span>
-          <strong>v1.0</strong>
+          <span>CONSTRUCTION ERP</span>
+          <strong>STUDY</strong>
         </div>
       </aside>
       {open && <button className="sidebar-overlay" type="button" onClick={onClose} aria-label="메뉴 닫기" />}

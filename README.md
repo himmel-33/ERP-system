@@ -36,7 +36,7 @@ ALTER USER construction_erp_app QUOTA UNLIMITED ON USERS;
 새 PowerShell을 열고 데이터베이스 접속 환경변수를 설정합니다.
 
 ```powershell
-cd C:\Users\82104\Desktop\claude\e-study\project-service
+cd C:\Users\82104\Desktop\codex\e-study\project-service
 $env:DB_USERNAME="your_username"
 $env:DB_PASSWORD="your_password"
 $env:DB_URL="jdbc:oracle:thin:@//localhost:1521/FREEPDB1"
@@ -55,7 +55,7 @@ mvn spring-boot:run
 별도 PowerShell을 열어 실행합니다.
 
 ```powershell
-cd C:\Users\82104\Desktop\claude\e-study\construction-erp-frontend
+cd C:\Users\82104\Desktop\codex\e-study\construction-erp-frontend
 npm install
 npm run dev
 ```
@@ -79,8 +79,25 @@ VITE_API_BASE_URL=http://localhost:8081/api
 - 로딩 및 API 오류 표시
 - 반응형 ERP 관리자 레이아웃
 - Swagger 기반 REST API 문서
+- 전사 업무를 요약하는 통합 대시보드
+- 인사, 연말정산, 경영, 회계, 자금, 영업, 공사, 외주, 자재, 노무, 경비, 안전보건, 공통 업무 모듈
+- 업무 모듈별 하위 탭, 요약 지표, 기간·현장·키워드 조회 조건
+- ERP 목록 Grid, 행 선택, 신규 등록, 수정 및 삭제 UI
+- 모바일 환경을 지원하는 업무 메뉴와 등록 드로어
 
-대시보드, 자원/재료, 인력, 재무/회계 메뉴는 현재 안내 화면만 제공합니다.
+Project 모듈은 Spring Boot REST API 및 Oracle과 연동됩니다. 새로 추가된 업무 모듈은 화면 구조와 업무 흐름을 학습하기 위한 단계로, 입력 데이터가 브라우저 메모리에 임시 반영됩니다. 각 도메인 백엔드가 추가되면 동일 화면을 REST API와 연결할 예정입니다.
+
+## 프런트엔드 업무 화면
+
+| 영역 | 제공 화면 |
+| --- | --- |
+| Overview | 통합 대시보드, 프로젝트 관리 |
+| Business | 경영, 영업, 공사, 외주, 자재 |
+| People | 인사, 노무, 연말정산, 안전보건 |
+| Finance | 회계, 자금, 경비 |
+| System | 공통코드, 거래처, 사용자 권한, 메뉴 및 시스템 설정 |
+
+각 업무 화면은 공통적으로 `업무 탭 → 요약 지표 → 조회 조건 → 목록 Grid → 등록/수정 드로어` 흐름을 사용합니다. 도메인별 화면 경험은 통일하되 컬럼, 지표와 하위 업무는 모듈 설정으로 분리했습니다.
 
 ## 건설 ERP 학습 방향
 
@@ -114,7 +131,7 @@ VITE_API_BASE_URL=http://localhost:8081/api
 6. 인사·노무 기초정보
 7. 회계·자금 현황
 
-각 기능은 기존 코드 구조를 먼저 확인한 뒤 현재 아키텍처에 맞게 구현하며, 레거시 시스템의 명명 규칙이나 기술 구조를 그대로 도입하지 않습니다.
+프런트엔드 1차 업무 화면은 위 범위로 구현했습니다. 다음 단계에서는 업무 우선순위에 따라 Spring Boot 마이크로서비스와 Oracle 스키마를 추가하고 현재 화면의 임시 상태를 실제 REST API로 교체합니다. 레거시 시스템의 명명 규칙이나 기술 구조는 그대로 도입하지 않습니다.
 
 ## 프로덕션 빌드 확인
 
