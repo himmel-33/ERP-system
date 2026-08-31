@@ -5,6 +5,7 @@ import ErpModulePage from './pages/ErpModulePage'
 import ProjectDetailPage from './pages/ProjectDetailPage'
 import ProjectFormPage from './pages/ProjectFormPage'
 import ProjectListPage from './pages/ProjectListPage'
+import VendorRegistrationPage from './pages/VendorRegistrationPage'
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="projects/new" element={<ProjectFormPage />} />
         <Route path="projects/:id" element={<ProjectDetailPage />} />
         <Route path="projects/:id/edit" element={<ProjectFormPage />} />
+        <Route path="erp/subcontract/vendor-registrations" element={<VendorRegistrationPage />} />
         <Route path="erp/:moduleKey" element={<ErpModulePage />} />
         <Route path="resources" element={<Navigate to="/erp/material" replace />} />
         <Route path="workforce" element={<Navigate to="/erp/hr" replace />} />

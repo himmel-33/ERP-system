@@ -72,7 +72,7 @@ export const erpModules = {
 
 export const moduleNavigation = [
   { section: 'OVERVIEW', items: [{ to: '/dashboard', icon: '⌂', label: '통합 대시보드' }, { to: '/projects', icon: '▤', label: '프로젝트 관리' }] },
-  { section: 'BUSINESS', items: [{ to: '/erp/management', icon: '▥', label: '경영' }, { to: '/erp/sales', icon: '↗', label: '영업' }, { to: '/erp/construction', icon: '▰', label: '공사' }, { to: '/erp/subcontract', icon: '◇', label: '외주' }, { to: '/erp/material', icon: '▧', label: '자재' }] },
+  { section: 'BUSINESS', items: [{ to: '/erp/management', icon: '▥', label: '경영' }, { to: '/erp/sales', icon: '↗', label: '영업' }, { to: '/erp/construction', icon: '▰', label: '공사' }, { to: '/erp/subcontract/vendor-registrations', icon: '◇', label: '외주' }, { to: '/erp/material', icon: '▧', label: '자재' }] },
   { section: 'PEOPLE', items: [{ to: '/erp/hr', icon: '♙', label: '인사' }, { to: '/erp/labor', icon: '♟', label: '노무' }, { to: '/erp/yearEnd', icon: '▱', label: '연말정산' }, { to: '/erp/safety', icon: '△', label: '안전보건' }] },
   { section: 'FINANCE', items: [{ to: '/erp/accounting', icon: '▦', label: '회계' }, { to: '/erp/treasury', icon: '₩', label: '자금' }, { to: '/erp/expense', icon: '▤', label: '경비' }] },
   { section: 'SYSTEM', items: [{ to: '/erp/common', icon: '⚙', label: '공통' }] },
